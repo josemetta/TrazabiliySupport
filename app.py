@@ -14,14 +14,24 @@ st.title("Dashboard Trazabilidad Soporte")
 
 # Autenticación con Google Sheets
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+
+# Detectar si estamos en Local o Cloud
+if "service_account" in st.secrets:
+    # Streamlit Cloud → secrets organizados en secciones
+    sa_info = st.secrets["service_account"]
+else:
+    # Local → secrets como diccionario plano
+    sa_info = st.secrets
+
 credentials = service_account.Credentials.from_service_account_info(
-    st.secrets, scopes=SCOPES
+    sa_info, scopes=SCOPES
 )
 service = build("sheets", "v4", credentials=credentials)
 
 # ID de la hoja y nombre de la hoja
 SPREADSHEET_ID = "1n1RzG32GYqTAK8Zm_Iqg3PEdt9U_YG4Nx-YwRCopMm8"
 SHEET_NAME = "data"
+
 
 @st.cache_data(ttl=60) # actualiza cada 60 segundos, reactiva pero no sobre carga el app
 def load_data(): 
