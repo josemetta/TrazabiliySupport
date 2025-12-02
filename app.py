@@ -27,7 +27,7 @@ SHEET_NAME = "data"
 def load_data(): 
     result = service.spreadsheets().values().get(
         spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME}!B2:AD101"
+        range=f"{SHEET_NAME}!B2:AD"
     ).execute()
 
     values = result.get("values", [])
