@@ -109,15 +109,35 @@ elif selected == "Consultas":
     st.dataframe(df_filtered[["NOMBRE / RAZÓN SOCIAL", "MODELO", "SERIAL", "GARANTÍA", "OBSERVACIONES CLIENTE"]])
 
 #========================================================================================
-# REPORTES
+# REPORTES 
 elif selected == "Reportes":
     st.header("Reportes")
     año = st.selectbox("Seleccione el año:", sorted(df["AÑO"].dropna().unique(), reverse=True))
     df_año = df[df["AÑO"] == año]
+    
     resumen = df_año.groupby(["MES", "ACCIONES REALIZADAS"]).size().reset_index(name="CANTIDAD")
-    fig = px.bar(resumen, x="MES", y="CANTIDAD", color="ACCIONES REALIZADAS",
-                 title=f"Equipos solucionados en {año}", barmode='relative')
+
+    # Mapa de colores personalizado
+    color_map = {
+        "HARDAWRE": "#F32E07",               # rojo intenso
+        "COMPONENTES MECANICOS": "#E36F0A",  # rojo menos intenso
+        "SOFTWARE": "#499FF4",               # azul oscuro
+        "OPERACIONAL": "#3CD387",            # verde claro
+        "OTROS": "#7E9B78"                   # rosado claro
+    }
+
+    fig = px.bar(
+        resumen,
+        x="MES",
+        y="CANTIDAD",
+        color="ACCIONES REALIZADAS",
+        title=f"Equipos solucionados en {año}",
+        barmode='relative',
+        color_discrete_map=color_map
+    )
+
     st.plotly_chart(fig, use_container_width=True)
+
 
 #========================================================================================
 # ESTADO DEL EQUIPO
