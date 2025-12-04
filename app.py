@@ -112,9 +112,14 @@ elif selected == "Consultas":
 # REPORTES 
 elif selected == "Reportes":
     st.header("Reportes")
+
     año = st.selectbox("Seleccione el año:", sorted(df["AÑO"].dropna().unique(), reverse=True))
     df_año = df[df["AÑO"] == año]
     
+    # -------------------------
+    # 1) GRÁFICO DE ACCIONES REALIZADAS
+    # -------------------------
+
     resumen = df_año.groupby(["MES", "ACCIONES REALIZADAS"]).size().reset_index(name="CANTIDAD")
 
     # Mapa de colores personalizado
@@ -126,17 +131,99 @@ elif selected == "Reportes":
         "OTROS": "#7E9B78"                   # rosado claro
     }
 
+    st.subheader(f"Equipos Ingresados en {año}")
     fig = px.bar(
         resumen,
         x="MES",
         y="CANTIDAD",
         color="ACCIONES REALIZADAS",
-        title=f"Equipos solucionados en {año}",
         barmode='relative',
         color_discrete_map=color_map
     )
-
     st.plotly_chart(fig, use_container_width=True)
+
+    # -------------------------
+    # 2) RATIO DE DESPERFECTO DE FÁBRICA
+    # -------------------------
+    st.subheader("Ratio de desperfecto de fábrica")
+
+    st.markdown("""
+    El **ratio de desperfectos de fábrica** se calcula como:
+    \n
+    **(Hardware + Componentes Mecánicos) / Total de equipos comercializados del mes × 100**
+    """)
+
+    # Cargar CSV desde el usuario
+    archivo_csv = st.file_uploader("Cargar archivo CSV con equipos comercializados por mes", type="csv")
+
+    if archivo_csv is not None:
+        df_comercializados = pd.read_csv(archivo_csv)
+
+        # 🔍 Normalizar nombres de columnas
+        df_comercializados.columns = df_comercializados.columns.str.upper()
+
+        # Se espera un CSV con columnas: MES, TOTAL_EQUIPOS
+        if not {"MES", "TOTAL_EQUIPOS"}.issubset(df_comercializados.columns):
+            st.error("El CSV debe contener las columnas: MES y TOTAL_EQUIPOS.")
+        else:
+            # Filtrar el DataFrame del año seleccionado
+            df_fallas = df_año.copy()
+
+            # Identificar desperfectos de fábrica
+            df_fallas["DESPERFECTO_FABRICA"] = df_fallas["ACCIONES REALIZADAS"].isin([
+                "HARDAWRE", "COMPONENTES MECANICOS"
+            ])
+
+            # Calcular fallas por mes
+            fallas_mes = df_fallas.groupby("MES")["DESPERFECTO_FABRICA"].sum().reset_index()
+            fallas_mes.rename(columns={"DESPERFECTO_FABRICA": "FALLAS"}, inplace=True)
+
+            # Unir con el CSV cargado
+            ratio_df = pd.merge(fallas_mes, df_comercializados, on="MES", how="left")
+
+            # Calcular ratio
+            ratio_df["RATIO_DESPERFECTO"] = (ratio_df["FALLAS"] / ratio_df["TOTAL_EQUIPOS"]) * 100
+
+            # Gráfico del ratio
+            fig_ratio = px.line(
+                ratio_df,
+                x="MES",
+                y="RATIO_DESPERFECTO",
+                markers=True,
+                title=f"Ratio de desperfecto de fábrica ({año})",
+                labels={"RATIO_DESPERFECTO": "Ratio (%)"},
+            )
+
+            # Asegurar estilo de línea y marcadores
+            fig_ratio.update_traces(
+                line_color="#F32E07",
+                line_width=4,
+                mode="lines+markers+text",   # <---- IMP
+                marker=dict(size=10, color="#F32E07"),
+                text=[f"{v:.2f}%" for v in ratio_df["RATIO_DESPERFECTO"]],
+                textposition="top center",
+                textfont=dict(color="black", size=15)
+            )
+
+            # Ajuste del título (tamaño)
+            fig_ratio.update_layout(
+                title_font=dict(size=28)  # aumentar o reducir
+            )
+
+            # Ajustar eje Y
+            fig_ratio.update_yaxes(range=[0, ratio_df["RATIO_DESPERFECTO"].max() * 1.2])
+
+            st.plotly_chart(fig_ratio, use_container_width=True)
+
+
+
+            # Mostrar tabla resumen
+            with st.expander("Ver datos del ratio"):
+                st.dataframe(ratio_df)
+
+    else:
+        st.info("Cargue un archivo CSV para calcular el ratio.")
+
 
 
 #========================================================================================
