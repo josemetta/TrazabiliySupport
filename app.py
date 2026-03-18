@@ -106,7 +106,7 @@ elif selected == "Consultas":
     if serial:
         df_filtered = df_filtered[df_filtered["SERIAL"].isin(serial)]
 
-    st.dataframe(df_filtered[["NOMBRE / RAZÓN SOCIAL", "MODELO", "SERIAL", "GARANTÍA", "OBSERVACIONES CLIENTE"]])
+    st.dataframe(df_filtered[["NOMBRE / RAZÓN SOCIAL", "MODELO", "SERIAL", "MAC","FECHA ADQUISICIÓN","FECHA INGRESO","GARANTÍA", "OBSERVACIONES CLIENTE","DIAGNÓSTICO INICIAL"]])
 
 #========================================================================================
 # REPORTES 

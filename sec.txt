@@ -1,0 +1,13 @@
+spreadsheet = "https://docs.google.com/spreadsheets/d/1j8ZSrj2nRZgBp5F6c03dxN7GLqCki2M8vWEX8kICB8M/edit?gid=1022288399#gid=1022288399"
+
+type= "service_account"
+project_id= "mettamerely-22"
+private_key_id= "18511a5ef23d68777ca81ec97f17ac45ab430301"
+private_key= "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC+jn0ewVSN2Hes\nEJuL6YGpeviqn2YQ2ytOY2xsjyW9u4MBvZyT6rkhVhWnliEVCJjQTLrJf1Yf5cJd\nStLJrtoZ6uQsPxpHk4BX0sI5gv4qmPlmVHmAhtmjmVxT8miu3HBugvcitE1s9JvE\njz4nAN0JZ/OaTAbGTle53eGf4nP0tB75rF+fsEZP7q//hcC2PrfsVmpKVRWb7+yB\nMgATHtymFuvme3vWW8COIg6Wk17sprHjsteOi4eBzNfGUbnYdPVM7zPAI4uYmBmp\ngc38iCyet9SL5A1b/GtnMAbWugfPq/4hRpFwFl8gSLRrKPJuhG3/jr6TpUpdO+qz\nX1pFWBXJAgMBAAECggEAAYUj4XU3xOm8GvzRwtSrZpQprDxuh+CkXdZsSLQ+dV72\ng/K/ZKItFSN0Hi9pRuXNSJnDbS9P+xvoovjMHun/SSY5qP0yta1gaxhDg/TZV8gQ\niD+RAw9AU0jk8XH9TLTLNvnM5Hjapm16mcot5p7VWeQmL4ie+WFqBicWFqHhByu4\n9i7mSFtHrSEbh4j/b82xtayOv3uRE70jFCMoqjXLJzUg9bJo+ZLc9FC5j5C+nA8D\nXEUqbnC5LIwIuUbiTPw5HMzYpZFjduRPqcUAfDlO585Rib7ixx14PVQ9nqMsdPt4\nKYCGLwVXYqXiwCOFN9fanq7XBICvaxPj+z1oF23ToQKBgQDv7aDovp3LY04MtDr/\ng3mh9uArPtUGb/RefCEdNYixfZuCCyrHrrn7ncZCck/nhCy6Le7+x6pX5vz1YRYx\nhnjQaHFHJ2rrKFyOYi4PrjF5KT2WhKbwasV3kU2I78ZQgejTsb2MLGmd6HCyz9tI\nB2gXXK9dNk3HzDiV/WWIzsJXqQKBgQDLUjfrYQLLW5BhXMjhktiVuj48k6kU1k5w\nz43kVmovUeKXtOX99iGaP90xyqANbYRke+itkm26n2xeDN/XyzrgjPDxbvA68Aa2\nowppYQb2fS6pzsy4ZPa2ZdG0YJ2wvTiEFNAI+eJhNJwXON4hN3l6I+b5YowgxGaF\n68CmL84hIQKBgBiidHgRQlBkxNnHE5uymyWHHKM0E1lS22tsIVZHbd6TgAkNLnpM\nNWphW77sz8l8p78CAl0EkTfvTp+/NTEmlncHkkH1CSRWA5LW/9W6U/gVxO4UdrOO\nsvHA6I4b2Gfhvs8lm8mtsbZ17ERf1SsDH6vuZ08RyVCvZkv4NZmjaQ7pAoGAfiI+\ngK6JPkFKm6wlDxO7e3+z9n6gaUXeGcwZOauGal7BVN4rxFZ6WCgAgFA05L+pX3Ej\nUvLBUgJvBxWzlDsHBqFJJG5vaBDaCVmyLte7qxTT6xJZHJe+Gj+mTeGWUjvBIOeM\ne9UR5L3vi9SCsVap7OTy+IlzZyyQccpklHSZyyECgYAHNmaNgkD8INk4YwKTwMSB\nWy7NB4eC37RCNh1ro45D6HFocnP73IAFr/bPo8g/eoZqSipVIeDQtMBY1A4ZhJLO\nl+Q/yfkUnAx8qMm63m/Lgpiel6DPfkEbxr1T+642+dHmrIdFdZCfUB1tlxZZxV6n\nBj3TPOC7zUjl/uqTo2bmew==\n-----END PRIVATE KEY-----\n"
+client_email= "testing-metta@mettamerely-22.iam.gserviceaccount.com"
+client_id= "106902000952879488871"
+auth_uri= "https://accounts.google.com/o/oauth2/auth"
+token_uri= "https://oauth2.googleapis.com/token"
+auth_provider_x509_cert_url= "https://www.googleapis.com/oauth2/v1/certs"
+client_x509_cert_url= "https://www.googleapis.com/robot/v1/metadata/x509/testing-metta%40mettamerely-22.iam.gserviceaccount.com"
+universe_domain= "googleapis.com"
